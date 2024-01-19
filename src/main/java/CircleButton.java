@@ -77,19 +77,24 @@ public class CircleButton extends JButton{
         int diameter = getDiameter();
         int radius = diameter/2;
 
+        //circle fill
         if(enabled && mousePressed){
             g.setColor(Color.BLACK);
         }
-        else if (!enabled){
-            g.setColor(Color.LIGHT_GRAY);
+        else if(enabled && mouseOver){
+            g.setColor(Color.GREEN);
+        }
+        else if (enabled){
+            g.setColor(new Color(210, 255, 210));
         }
         else{
-            g.setColor(Color.WHITE);
+            g.setColor(new Color(255, 210, 210));
         }
         g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
 
-        if(mouseOver){
-            g.setColor(Color.BLUE);
+        //circle outline
+        if(mouseOver && enabled && !mousePressed){
+            g.setColor(Color.GREEN);
         }
         else{
             g.setColor(Color.BLACK);

@@ -5,7 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f9a091a-0a49-401f-8b0e-3e79c2e5adac" name="Changes" comment="board size select and grid layout of circle buttons">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CircleButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CircleButton.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/GameController.java" afterDir="false" />
     </list>

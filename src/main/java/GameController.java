@@ -23,7 +23,7 @@ public class GameController implements ActionListener{
         //frame setup
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 900);
-        frame.getContentPane().setBackground(new Color(200, 255, 200));
+        frame.getContentPane().setBackground(Color.WHITE);
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
 
@@ -43,6 +43,7 @@ public class GameController implements ActionListener{
 
         //menu button panel setup
         buttonPanel.setBounds(0, 200, 800, 200);
+        buttonPanel.setBackground(Color.WHITE);
         sBoardButton.setBounds(0, 0, 50, 30);
         sBoardButton.addActionListener(new ActionListener() {
             @Override
