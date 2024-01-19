@@ -11,6 +11,7 @@ public class CircleButton extends JButton{
 
     private boolean mouseOver = false;
     private boolean mousePressed = false;
+    private boolean enabled = true;
 
     public CircleButton(String text){
         super(text);
@@ -30,14 +31,14 @@ public class CircleButton extends JButton{
 
             @Override
             public void mouseReleased(MouseEvent me){
-                mousePressed = false;
+//                mousePressed = false;
                 repaint();
             }
 
             @Override
             public void mouseExited(MouseEvent me){
                 mouseOver = false;
-                mousePressed = false;
+//                mousePressed = false;
                 repaint();
             }
 
@@ -76,7 +77,10 @@ public class CircleButton extends JButton{
         int diameter = getDiameter();
         int radius = diameter/2;
 
-        if(mousePressed){
+        if(enabled && mousePressed){
+            g.setColor(Color.BLACK);
+        }
+        else if (!enabled){
             g.setColor(Color.LIGHT_GRAY);
         }
         else{
@@ -98,5 +102,13 @@ public class CircleButton extends JButton{
         int stringWidth = metrics.stringWidth(getText());
         int stringHeight = metrics.getHeight();
         g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);
+    }
+
+    public void setEnabled(boolean enabled){
+        this.enabled = enabled;
+    }
+
+    public boolean getEnabled(){
+        return enabled;
     }
 }

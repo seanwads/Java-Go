@@ -15,7 +15,9 @@ public class GameController implements ActionListener{
     JButton lBoardButton = new JButton("19x19");
 
     CircleButton[] buttons;
-    boolean blackTurn = true;
+    boolean blackTurn;
+    private boolean firstTurn;
+    int boardSize;
 
     public GameController(){
         //frame setup
@@ -45,7 +47,8 @@ public class GameController implements ActionListener{
         sBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                firstTurn(9);
+                boardSize = 9;
+                firstTurn();
             }
         });
         buttonPanel.add(sBoardButton);
@@ -54,7 +57,8 @@ public class GameController implements ActionListener{
         mBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                firstTurn(13);
+                boardSize = 13;
+                firstTurn();
             }
         });
         buttonPanel.add(mBoardButton);
@@ -63,7 +67,8 @@ public class GameController implements ActionListener{
         lBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                firstTurn(19);
+                boardSize = 13;
+                firstTurn();
             }
         });
         buttonPanel.add(lBoardButton);
@@ -73,10 +78,15 @@ public class GameController implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        for(int i = 0; i < boardSize; i++){
+            if(e.getSource()==buttons[i]){
+                buttons[i].setBackground(Color.BLACK);
+                System.out.println("Button clicked");
+            }
+        }
     }
 
-    public void firstTurn(int boardSize){
+    public void firstTurn(){
         buttonPanel.remove(sBoardButton);
         buttonPanel.remove(mBoardButton);
         buttonPanel.remove(lBoardButton);
@@ -84,7 +94,7 @@ public class GameController implements ActionListener{
         buttons = new CircleButton[boardSize*boardSize];
         buttonPanel.setLayout(new GridLayout(boardSize, boardSize));
 
-        for(JButton button : buttons){
+        for(CircleButton button : buttons){
             button = new CircleButton("");
             buttonPanel.add(button);
             button.setFocusable(false);
@@ -94,6 +104,9 @@ public class GameController implements ActionListener{
         frame.add(buttonPanel);
 
         textField.setText("Black's turn");
+        blackTurn = true;
+        firstTurn = true;
+
         frame.getContentPane().revalidate();
         frame.getContentPane().repaint();
     }
@@ -109,4 +122,5 @@ public class GameController implements ActionListener{
     public void blackWins(){
 
     }
+
 }
