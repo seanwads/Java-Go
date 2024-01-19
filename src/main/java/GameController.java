@@ -18,12 +18,14 @@ public class GameController implements ActionListener{
     boolean blackTurn = true;
 
     public GameController(){
+        //frame setup
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 800);
+        frame.setSize(800, 900);
         frame.getContentPane().setBackground(new Color(200, 255, 200));
         frame.setLayout(new BorderLayout());
         frame.setVisible(true);
 
+        //text field setup
         textField.setBackground(new Color(255, 255, 255));
         textField.setForeground(new Color(30, 0, 0));
         textField.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));
@@ -31,24 +33,39 @@ public class GameController implements ActionListener{
         textField.setText("Select board size to start");
         textField.setOpaque(true);
 
+        //title panel setup
         titlePanel.setLayout(new BorderLayout());
         titlePanel.setBounds(0, 0, 800, 200);
-
         titlePanel.add(textField);
         frame.add(titlePanel, BorderLayout.NORTH);
 
+        //menu button panel setup
         buttonPanel.setBounds(0, 200, 800, 200);
-
         sBoardButton.setBounds(0, 0, 50, 30);
-        sBoardButton.addActionListener(this);
+        sBoardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                firstTurn(9);
+            }
+        });
         buttonPanel.add(sBoardButton);
 
         mBoardButton.setBounds(0, 0, 50, 30);
-        mBoardButton.addActionListener(this);
+        mBoardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                firstTurn(13);
+            }
+        });
         buttonPanel.add(mBoardButton);
 
         lBoardButton.setBounds(0, 0, 50, 30);
-        lBoardButton.addActionListener(this);
+        lBoardButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                firstTurn(19);
+            }
+        });
         buttonPanel.add(lBoardButton);
         frame.add(buttonPanel, BorderLayout.CENTER);
 
@@ -60,6 +77,10 @@ public class GameController implements ActionListener{
     }
 
     public void firstTurn(int boardSize){
+        buttonPanel.remove(sBoardButton);
+        buttonPanel.remove(mBoardButton);
+        buttonPanel.remove(lBoardButton);
+
         buttons = new CircleButton[boardSize*boardSize];
         buttonPanel.setLayout(new GridLayout(boardSize, boardSize));
 
@@ -71,9 +92,13 @@ public class GameController implements ActionListener{
         }
 
         frame.add(buttonPanel);
+
+        textField.setText("Black's turn");
+        frame.getContentPane().revalidate();
+        frame.getContentPane().repaint();
     }
 
-    public void checkWin(){
+    public void checkCapture(){
 
     }
 
