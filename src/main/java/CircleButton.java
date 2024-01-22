@@ -6,56 +6,32 @@ import java.awt.geom.Point2D;
 import java.awt.FontMetrics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class CircleButton extends JButton{
 
     private boolean mouseOver = false;
     private boolean mousePressed = false;
     private boolean enabled = true;
+    private boolean blackTurn;
+    private boolean stonePlaced = false;
+    private boolean checked = false;
 
-    public CircleButton(String text){
+    private CircleButton[] neighbours;
+    private final int xPos;
+    private final int yPos;
+
+    public CircleButton(String text, int x, int y){
         super(text);
         setOpaque(false);
         setFocusPainted(false);
         setBorderPainted(false);
-
-        MouseAdapter mouseListener = new MouseAdapter(){
-
-            @Override
-            public void mousePressed(MouseEvent me){
-                if(contains(me.getX(), me.getY())){
-                    mousePressed = true;
-                    repaint();
-                }
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent me){
-//                mousePressed = false;
-                repaint();
-            }
-
-            @Override
-            public void mouseExited(MouseEvent me){
-                mouseOver = false;
-//                mousePressed = false;
-                repaint();
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent me){
-                mouseOver = contains(me.getX(), me.getY());
-                repaint();
-            }
-        };
-
-        addMouseListener(mouseListener);
-        addMouseMotionListener(mouseListener);
+        xPos = x;
+        yPos = y;
     }
 
     private int getDiameter(){
-        int diameter = Math.min(getWidth(), getHeight());
-        return diameter;
+        return Math.min(getWidth(), getHeight());
     }
 
     @Override
@@ -74,23 +50,38 @@ public class CircleButton extends JButton{
     @Override
     public void paintComponent(Graphics g){
 
+        if(!stonePlaced){
+
+        }
         int diameter = getDiameter();
         int radius = diameter/2;
 
         //circle fill
-        if(enabled && mousePressed){
-            g.setColor(Color.BLACK);
-        }
-        else if(enabled && mouseOver){
-            g.setColor(Color.GREEN);
-        }
-        else if (enabled){
-            g.setColor(new Color(210, 255, 210));
+        if(enabled){
+            if(mousePressed){
+                if(this.blackTurn){
+                    g.setColor(Color.BLACK);
+                    setStonePlaced(true);
+                }
+                else{
+                    g.setColor(Color.WHITE);
+                    setStonePlaced(true);
+                }
+            }
+            else if(mouseOver){
+                g.setColor(Color.GREEN);
+            }
+            else{
+                g.setColor(new Color(210, 255, 210));
+            }
+
+            g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
         }
         else{
             g.setColor(new Color(255, 210, 210));
+            g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
         }
-        g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
+
 
         //circle outline
         if(mouseOver && enabled && !mousePressed){
@@ -101,6 +92,7 @@ public class CircleButton extends JButton{
         }
         g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
 
+
         g.setColor(Color.BLACK);
         g.setFont(getFont());
         FontMetrics metrics = g.getFontMetrics(getFont());
@@ -109,11 +101,60 @@ public class CircleButton extends JButton{
         g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);
     }
 
+    public void placeStone(boolean state){
+        blackTurn = state;
+        mousePressed = true;
+        for(int i = 0; i < neighbours.length; i++){
+            System.out.println("neighbour " + neighbours[i].getxPos() + neighbours[i].getyPos());
+        }
+
+        repaint();
+    }
+
     public void setEnabled(boolean enabled){
         this.enabled = enabled;
     }
 
-    public boolean getEnabled(){
-        return enabled;
+    public void setMousePressed(boolean mousePressed){
+        this.mousePressed = mousePressed;
+    }
+
+    public void setBlackTurn(boolean isBlack){
+        this.blackTurn = isBlack;
+    }
+
+    public boolean isBlackTurn() {
+        return blackTurn;
+    }
+
+    public boolean isStonePlaced() {
+        return stonePlaced;
+    }
+
+    public void setStonePlaced(boolean stonePlaced) {
+        this.stonePlaced = stonePlaced;
+    }
+
+    public CircleButton[] getNeighbours() {
+        return neighbours;
+    }
+
+    public void setNeighbours(CircleButton[] neighbours) {
+        this.neighbours = neighbours;
+    }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public boolean isChecked() {
+        return checked;
+    }
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 }

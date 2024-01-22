@@ -3,7 +3,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class GameController implements ActionListener{
+public class GameController {
 
     Random random = new Random();
     JFrame frame = new JFrame();
@@ -14,10 +14,13 @@ public class GameController implements ActionListener{
     JButton mBoardButton = new JButton("13x13");
     JButton lBoardButton = new JButton("19x19");
 
-    CircleButton[] buttons;
+    CircleButton[][] buttons;
     boolean blackTurn;
     private boolean firstTurn;
     int boardSize;
+    int blackCaptured = 0;
+    int whiteCaptured = 0;
+    ArrayList<CircleButton> stonesToCapture = new ArrayList<>();
 
     public GameController(){
         //frame setup
@@ -77,42 +80,86 @@ public class GameController implements ActionListener{
 
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        for(int i = 0; i < boardSize; i++){
-            if(e.getSource()==buttons[i]){
-                buttons[i].setBackground(Color.BLACK);
-                System.out.println("Button clicked");
-            }
-        }
-    }
-
     public void firstTurn(){
         buttonPanel.remove(sBoardButton);
         buttonPanel.remove(mBoardButton);
         buttonPanel.remove(lBoardButton);
 
-        buttons = new CircleButton[boardSize*boardSize];
+        buttons = new CircleButton[boardSize][boardSize];
         buttonPanel.setLayout(new GridLayout(boardSize, boardSize));
 
-        for(CircleButton button : buttons){
-            button = new CircleButton("");
-            buttonPanel.add(button);
-            button.setFocusable(false);
-            button.addActionListener(this);
-        }
+        for(int y = 0; y < boardSize; y++){
+            for(int x = 0; x < boardSize; x++){
+                buttons[x][y] = new CircleButton("", x, y);
+                buttonPanel.add(buttons[x][y]);
+                setNeighbours(x, y);
+                buttons[x][y].setBlackTurn(true);
+                buttons[x][y].setFocusable(false);
+                int finalX = x;
+                int finalY = y;
+                buttons[x][y].addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if(!buttons[finalX][finalY].isStonePlaced()){
+                            buttons[finalX][finalY].placeStone(blackTurn);
+                            checkCapture(finalX, finalY);
 
+                            blackTurn = !blackTurn;
+                            updateTextField();
+                        }
+                    }
+                });
+            }
+        }
         frame.add(buttonPanel);
 
-        textField.setText("Black's turn");
         blackTurn = true;
         firstTurn = true;
+        updateTextField();
 
         frame.getContentPane().revalidate();
         frame.getContentPane().repaint();
     }
 
-    public void checkCapture(){
+//    private void setNeighbours(int x, int y) {
+//        CircleButton[] neighbours;
+//
+//        if((x == 0 && y == 0) || (x == boardSize - 1 && y == boardSize - 1 ) || (x == 0 && y == boardSize - 1) || (x == boardSize - 1 && y == 0)){
+//            neighbours = new CircleButton[2];
+//            neighbours[0] = buttons[x == 0 ? x+1 : x-1][y];
+//            neighbours[1] = buttons[x][y == 0 ? y+1 : y-1];
+//        }
+//        else if(x == 0 || x == boardSize - 1 || y == 0 || y == boardSize - 1){
+//            neighbours = new CircleButton[3];
+//            if(x == 0 || x == boardSize - 1){
+//                neighbours[0] = buttons[x][y+1];
+//                neighbours[1] = buttons[x == 0 ? x : x-1][y];
+//                neighbours[2] = buttons[x][y-1];
+//            } else {
+//                neighbours[0] = buttons[x-1][y];
+//                neighbours[1] = buttons[x][y == 0 ? y+1 : y-1];
+//                neighbours[2] = buttons[x+1][y];
+//            }
+//        }
+//        else{
+//            neighbours = new CircleButton[4];
+//            neighbours[0] = buttons[x-1][y];
+//            neighbours[1] = buttons[x][y+1];
+//            neighbours[2] = buttons[x][y-1];
+//            neighbours[3] = buttons[x+1][y];
+//        }
+//        buttons[x][y].setNeighbours(neighbours);
+//    }
+
+    private void updateTextField() {
+        if(blackTurn){
+            textField.setText("Black's Turn");
+        } else {
+            textField.setText("White's Turn");
+        }
+    }
+
+    public void checkCapture(int x, int y){
 
     }
 
