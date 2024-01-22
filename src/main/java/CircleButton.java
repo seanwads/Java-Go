@@ -14,7 +14,7 @@ public class CircleButton extends JButton{
     private boolean mouseOver = false;
     private boolean mousePressed = false;
     private boolean enabled = true;
-    private boolean blackTurn;
+    private boolean blackTurn = true;
     private boolean stonePlaced = false;
     private boolean checked = false;
 
@@ -62,11 +62,9 @@ public class CircleButton extends JButton{
             if(mousePressed){
                 if(this.blackTurn){
                     g.setColor(Color.BLACK);
-                    setStonePlaced(true);
                 }
                 else{
                     g.setColor(Color.WHITE);
-                    setStonePlaced(true);
                 }
             }
             else if(mouseOver){
@@ -105,9 +103,7 @@ public class CircleButton extends JButton{
     public void placeStone(boolean state){
         blackTurn = state;
         mousePressed = true;
-        for(CircleButton stone : neighbours){
-            System.out.println(stone.getxPos() + " " + stone.getyPos());
-        }
+        stonePlaced = true;
         repaint();
     }
 

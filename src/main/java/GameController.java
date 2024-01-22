@@ -101,7 +101,8 @@ public class GameController {
                     public void actionPerformed(ActionEvent e) {
                         if(!buttons[finalX][finalY].isStonePlaced()){
                             buttons[finalX][finalY].placeStone(blackTurn);
-                            checkCapture(finalX, finalY);
+                            checkChain(finalX, finalY);
+                            checkCapture();
                             blackTurn = !blackTurn;
                             updateTextField();
                         }
@@ -115,7 +116,6 @@ public class GameController {
                setNeighbours(x, y);
             }
         }
-
 
 
         frame.add(buttonPanel);
@@ -155,11 +155,49 @@ public class GameController {
         }
     }
 
-    public void checkCapture(int x, int y){
-        if(buttons[x-1][y].isStonePlaced() && buttons[x][y-1].isStonePlaced() && buttons[x][y+1].isStonePlaced() && buttons[x+1][y].isStonePlaced()){
-            System.out.println("capture");
+    ArrayList<CircleButton> stonesToCheck = new ArrayList<>();
+    private void checkChain(int x, int y){
+        CircleButton stone = buttons[x][y];
+
+        for(CircleButton neighbour : stone.getNeighbours()){
+            if(neighbour.isStonePlaced() && neighbour.isBlackTurn() != blackTurn && !stonesToCheck.contains(neighbour)){
+                stonesToCheck.add(neighbour);
+                System.out.println(neighbour.getxPos() + ", " + neighbour.getyPos());
+                checkChain(neighbour.getxPos(), neighbour.getyPos());
+            }
         }
     }
+
+   private void checkCapture() {
+        if(!stonesToCheck.isEmpty()){
+            for(CircleButton stone : stonesToCheck){
+                for(CircleButton neighbour : stone.getNeighbours()){
+                    if(!neighbour.isStonePlaced()){
+                        System.out.println("not capture");
+                        stonesToCheck.clear();
+                        return;
+                    }
+                }
+            }
+
+            for(CircleButton stone: stonesToCheck){
+                stone.setStonePlaced(false);
+                stone.setMousePressed(false);
+                stone.repaint();
+            }
+
+            if(blackTurn){
+                whiteCaptured += stonesToCheck.size();
+            }
+            else{
+                blackCaptured += stonesToCheck.size();
+            }
+
+            System.out.println(whiteCaptured + " white");
+            System.out.println(blackCaptured + " black");
+            stonesToCheck.clear();
+        }
+   }
 
     public void whiteWins(){
 
