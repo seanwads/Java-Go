@@ -17,7 +17,7 @@ public class GameController {
     CircleButton[][] buttons;
     boolean blackTurn;
     private boolean firstTurn;
-    int boardSize;
+    int boardSize = 9;
     int blackCaptured = 0;
     int whiteCaptured = 0;
     ArrayList<CircleButton> stonesToCapture = new ArrayList<>();
@@ -71,7 +71,7 @@ public class GameController {
         lBoardButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boardSize = 13;
+                boardSize = 19;
                 firstTurn();
             }
         });
@@ -92,7 +92,6 @@ public class GameController {
             for(int x = 0; x < boardSize; x++){
                 buttons[x][y] = new CircleButton("", x, y);
                 buttonPanel.add(buttons[x][y]);
-                setNeighbours(x, y);
                 buttons[x][y].setBlackTurn(true);
                 buttons[x][y].setFocusable(false);
                 int finalX = x;
@@ -103,7 +102,6 @@ public class GameController {
                         if(!buttons[finalX][finalY].isStonePlaced()){
                             buttons[finalX][finalY].placeStone(blackTurn);
                             checkCapture(finalX, finalY);
-
                             blackTurn = !blackTurn;
                             updateTextField();
                         }
@@ -111,6 +109,15 @@ public class GameController {
                 });
             }
         }
+
+        for(int y = 0; y < boardSize; y++){
+            for(int x = 0; x < boardSize; x++){
+               setNeighbours(x, y);
+            }
+        }
+
+
+
         frame.add(buttonPanel);
 
         blackTurn = true;
@@ -121,35 +128,24 @@ public class GameController {
         frame.getContentPane().repaint();
     }
 
-//    private void setNeighbours(int x, int y) {
-//        CircleButton[] neighbours;
-//
-//        if((x == 0 && y == 0) || (x == boardSize - 1 && y == boardSize - 1 ) || (x == 0 && y == boardSize - 1) || (x == boardSize - 1 && y == 0)){
-//            neighbours = new CircleButton[2];
-//            neighbours[0] = buttons[x == 0 ? x+1 : x-1][y];
-//            neighbours[1] = buttons[x][y == 0 ? y+1 : y-1];
-//        }
-//        else if(x == 0 || x == boardSize - 1 || y == 0 || y == boardSize - 1){
-//            neighbours = new CircleButton[3];
-//            if(x == 0 || x == boardSize - 1){
-//                neighbours[0] = buttons[x][y+1];
-//                neighbours[1] = buttons[x == 0 ? x : x-1][y];
-//                neighbours[2] = buttons[x][y-1];
-//            } else {
-//                neighbours[0] = buttons[x-1][y];
-//                neighbours[1] = buttons[x][y == 0 ? y+1 : y-1];
-//                neighbours[2] = buttons[x+1][y];
-//            }
-//        }
-//        else{
-//            neighbours = new CircleButton[4];
-//            neighbours[0] = buttons[x-1][y];
-//            neighbours[1] = buttons[x][y+1];
-//            neighbours[2] = buttons[x][y-1];
-//            neighbours[3] = buttons[x+1][y];
-//        }
-//        buttons[x][y].setNeighbours(neighbours);
-//    }
+    private void setNeighbours(int x, int y){
+        ArrayList<CircleButton> neighbours = new ArrayList<>();
+
+        for(int i = -1; i < 2; i++){
+            for(int j = -1; j < 2; j++){
+                if(!( i==j ) && !(i == -1 && j == 1) && !(i == 1 && j == -1)){
+                    try{
+                        neighbours.add(buttons[x+i][y+j]);
+                    } catch(Exception e){
+                        //button not added to list
+                    }
+                }
+            }
+        }
+
+        buttons[x][y].setNeighbours(neighbours);
+
+    }
 
     private void updateTextField() {
         if(blackTurn){
@@ -160,7 +156,9 @@ public class GameController {
     }
 
     public void checkCapture(int x, int y){
-
+        if(buttons[x-1][y].isStonePlaced() && buttons[x][y-1].isStonePlaced() && buttons[x][y+1].isStonePlaced() && buttons[x+1][y].isStonePlaced()){
+            System.out.println("capture");
+        }
     }
 
     public void whiteWins(){

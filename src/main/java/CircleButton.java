@@ -6,6 +6,7 @@ import java.awt.geom.Point2D;
 import java.awt.FontMetrics;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class CircleButton extends JButton{
@@ -17,7 +18,7 @@ public class CircleButton extends JButton{
     private boolean stonePlaced = false;
     private boolean checked = false;
 
-    private CircleButton[] neighbours;
+    private ArrayList<CircleButton> neighbours;
     private final int xPos;
     private final int yPos;
 
@@ -104,10 +105,9 @@ public class CircleButton extends JButton{
     public void placeStone(boolean state){
         blackTurn = state;
         mousePressed = true;
-        for(int i = 0; i < neighbours.length; i++){
-            System.out.println("neighbour " + neighbours[i].getxPos() + neighbours[i].getyPos());
+        for(CircleButton stone : neighbours){
+            System.out.println(stone.getxPos() + " " + stone.getyPos());
         }
-
         repaint();
     }
 
@@ -135,11 +135,11 @@ public class CircleButton extends JButton{
         this.stonePlaced = stonePlaced;
     }
 
-    public CircleButton[] getNeighbours() {
+    public ArrayList<CircleButton> getNeighbours() {
         return neighbours;
     }
 
-    public void setNeighbours(CircleButton[] neighbours) {
+    public void setNeighbours(ArrayList<CircleButton> neighbours) {
         this.neighbours = neighbours;
     }
 
