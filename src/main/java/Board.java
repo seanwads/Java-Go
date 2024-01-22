@@ -3,9 +3,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class GameController {
-
-    Random random = new Random();
+public class Board {
     JFrame frame = new JFrame();
     JPanel titlePanel = new JPanel();
     JPanel buttonPanel = new JPanel();
@@ -14,15 +12,14 @@ public class GameController {
     JButton mBoardButton = new JButton("13x13");
     JButton lBoardButton = new JButton("19x19");
 
-    CircleButton[][] buttons;
+    Stone[][] buttons;
     boolean blackTurn;
-    private boolean firstTurn;
     int boardSize = 9;
     int blackCaptured = 0;
     int whiteCaptured = 0;
-    ArrayList<CircleButton> stonesToCapture = new ArrayList<>();
+    ArrayList<Stone> stonesToCapture = new ArrayList<>();
 
-    public GameController(){
+    public Board(){
         //frame setup
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 900);
@@ -85,12 +82,12 @@ public class GameController {
         buttonPanel.remove(mBoardButton);
         buttonPanel.remove(lBoardButton);
 
-        buttons = new CircleButton[boardSize][boardSize];
+        buttons = new Stone[boardSize][boardSize];
         buttonPanel.setLayout(new GridLayout(boardSize, boardSize));
 
         for(int y = 0; y < boardSize; y++){
             for(int x = 0; x < boardSize; x++){
-                buttons[x][y] = new CircleButton("", x, y);
+                buttons[x][y] = new Stone("", x, y);
                 buttonPanel.add(buttons[x][y]);
                 buttons[x][y].setBlackTurn(true);
                 buttons[x][y].setFocusable(false);
@@ -110,18 +107,14 @@ public class GameController {
                 });
             }
         }
-
         for(int y = 0; y < boardSize; y++){
             for(int x = 0; x < boardSize; x++){
                setNeighbours(x, y);
             }
         }
-
-
         frame.add(buttonPanel);
 
         blackTurn = true;
-        firstTurn = true;
         updateTextField();
 
         frame.getContentPane().revalidate();
@@ -129,7 +122,7 @@ public class GameController {
     }
 
     private void setNeighbours(int x, int y){
-        ArrayList<CircleButton> neighbours = new ArrayList<>();
+        ArrayList<Stone> neighbours = new ArrayList<>();
 
         for(int i = -1; i < 2; i++){
             for(int j = -1; j < 2; j++){
@@ -142,9 +135,7 @@ public class GameController {
                 }
             }
         }
-
         buttons[x][y].setNeighbours(neighbours);
-
     }
 
     private void updateTextField() {
@@ -155,11 +146,11 @@ public class GameController {
         }
     }
 
-    ArrayList<CircleButton> stonesToCheck = new ArrayList<>();
+    ArrayList<Stone> stonesToCheck = new ArrayList<>();
     private void checkChain(int x, int y){
-        CircleButton stone = buttons[x][y];
+        Stone stone = buttons[x][y];
 
-        for(CircleButton neighbour : stone.getNeighbours()){
+        for(Stone neighbour : stone.getNeighbours()){
             if(neighbour.isStonePlaced() && neighbour.isBlackTurn() != blackTurn && !stonesToCheck.contains(neighbour)){
                 stonesToCheck.add(neighbour);
                 System.out.println(neighbour.getxPos() + ", " + neighbour.getyPos());
@@ -170,8 +161,8 @@ public class GameController {
 
    private void checkCapture() {
         if(!stonesToCheck.isEmpty()){
-            for(CircleButton stone : stonesToCheck){
-                for(CircleButton neighbour : stone.getNeighbours()){
+            for(Stone stone : stonesToCheck){
+                for(Stone neighbour : stone.getNeighbours()){
                     if(!neighbour.isStonePlaced()){
                         System.out.println("not capture");
                         stonesToCheck.clear();
@@ -180,7 +171,7 @@ public class GameController {
                 }
             }
 
-            for(CircleButton stone: stonesToCheck){
+            for(Stone stone: stonesToCheck){
                 stone.setStonePlaced(false);
                 stone.setMousePressed(false);
                 stone.repaint();

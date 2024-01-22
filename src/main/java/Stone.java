@@ -4,12 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.awt.FontMetrics;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class CircleButton extends JButton{
+public class Stone extends JButton{
 
     private boolean mouseOver = false;
     private boolean mousePressed = false;
@@ -18,11 +15,11 @@ public class CircleButton extends JButton{
     private boolean stonePlaced = false;
     private boolean checked = false;
 
-    private ArrayList<CircleButton> neighbours;
+    private ArrayList<Stone> neighbours;
     private final int xPos;
     private final int yPos;
 
-    public CircleButton(String text, int x, int y){
+    public Stone(String text, int x, int y){
         super(text);
         setOpaque(false);
         setFocusPainted(false);
@@ -131,11 +128,11 @@ public class CircleButton extends JButton{
         this.stonePlaced = stonePlaced;
     }
 
-    public ArrayList<CircleButton> getNeighbours() {
+    public ArrayList<Stone> getNeighbours() {
         return neighbours;
     }
 
-    public void setNeighbours(ArrayList<CircleButton> neighbours) {
+    public void setNeighbours(ArrayList<Stone> neighbours) {
         this.neighbours = neighbours;
     }
 
