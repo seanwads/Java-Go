@@ -1,10 +1,15 @@
+import org.junit.Before;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class GoTest {
     final int testBoardSize = 13;
     Board board;
+
+    @Before
+    public void setUpHeadlessMode() {
+        System.setProperty("java.awt.headless", "true");
+    }
 
     @Test
     public void testCreateBoardSize(){
