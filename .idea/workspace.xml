@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0f9a091a-0a49-401f-8b0e-3e79c2e5adac" name="Changes" comment="board size select and grid layout of circle buttons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/GoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GoTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,9 +68,9 @@
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sophi/Documents/TSIJava/Jan/Go2",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+    "project.structure.side.proportion": "0.35632184"
   }
 }]]></component>
   <component name="RunManager" selected="JUnit.GoTest">
