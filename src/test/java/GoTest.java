@@ -6,14 +6,11 @@ public class GoTest {
     final int testBoardSize = 13;
     Board board;
 
-    @BeforeEach
-    public void testSetup(){
-        board = new Board();
-        board.boardSize = testBoardSize;
-    }
-
     @Test
     public void testCreateBoardSize(){
+        board = new Board();
+        board.boardSize = testBoardSize;
+
         board.firstTurn(false);
 
         Assertions.assertEquals(testBoardSize, board.buttons.length, "Board size " + board.buttons.length + " not " + testBoardSize*testBoardSize);
@@ -21,6 +18,9 @@ public class GoTest {
 
     @Test
     public void testSetHandicap(){
+        board = new Board();
+        board.boardSize = testBoardSize;
+
         board.firstTurn(true);;
 
         Assertions.assertTrue(board.isHandicapTurn, "Handicap turn not initialised");
@@ -34,6 +34,8 @@ public class GoTest {
 
     @Test
     public void testStonesEnabled(){
+        board = new Board();
+        board.boardSize = testBoardSize;
         board.firstTurn(false);
 
         boolean isEnabled = false;
@@ -53,6 +55,8 @@ public class GoTest {
 
     @Test
     public void testPlaceStone(){
+        board = new Board();
+        board.boardSize = testBoardSize;
         board.firstTurn(false);
 
         Stone stone = board.buttons[0][0];
@@ -65,6 +69,8 @@ public class GoTest {
 
     @Test
     public void testPlaceStoneDisabled(){
+        board = new Board();
+        board.boardSize = testBoardSize;
         board.firstTurn(true);;
         Stone stone = board.buttons[0][0];
         stone.doClick();
@@ -74,6 +80,8 @@ public class GoTest {
 
     @Test
     public void testCaptureStone(){
+        board = new Board();
+        board.boardSize = testBoardSize;
         board.firstTurn(false);
 
         Stone stone = board.buttons[2][2];
@@ -92,6 +100,8 @@ public class GoTest {
 
     @Test
     public void testCaptureMultipleStones() throws InterruptedException {
+        board = new Board();
+        board.boardSize = testBoardSize;
         board.firstTurn(false);
 
         Thread.sleep(1000);
