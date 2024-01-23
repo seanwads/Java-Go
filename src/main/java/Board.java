@@ -18,6 +18,7 @@ public class Board {
     JButton yesButton = new JButton("Yes");
     JButton noButton = new JButton("No");
     JLabel handicapText = new JLabel("Set Handicap?");
+    JButton startButton;
 
     Stone[][] buttons;
     boolean blackTurn;
@@ -132,7 +133,7 @@ public class Board {
         frame.getContentPane().repaint();
     }
 
-    private void firstTurn(boolean isHandicap){
+    public void firstTurn(boolean isHandicap){
         buttonPanel.remove(handicapText);
         buttonPanel.remove(yesButton);
         buttonPanel.remove(noButton);
@@ -151,7 +152,7 @@ public class Board {
                 buttons[x][y].addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if(!buttons[finalX][finalY].isStonePlaced()){
+                        if(!buttons[finalX][finalY].isStonePlaced() && buttons[finalX][finalY].getEnabled()){
                             buttons[finalX][finalY].placeStone(blackTurn);
 
                             if(!isHandicapTurn){
@@ -214,8 +215,8 @@ public class Board {
                 }
                 break;
         }
-        JButton startButton = new JButton("Start Game");
-        startButton.setMaximumSize(new Dimension(200, 100));
+
+        startButton = new JButton("Start Game");
         startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -247,7 +248,7 @@ public class Board {
                     try{
                         neighbours.add(buttons[x+i][y+j]);
                     } catch(Exception e){
-                        //button not added to list
+                        continue;
                     }
                 }
             }

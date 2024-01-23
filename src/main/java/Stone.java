@@ -10,7 +10,7 @@ public class Stone extends JButton{
 
     private boolean mouseOver = false;
     private boolean mousePressed = false;
-    private boolean enabled = true;
+    private boolean stoneEnabled = true;
     private boolean blackTurn = true;
     private boolean stonePlaced = false;
     private boolean checked = false;
@@ -47,25 +47,18 @@ public class Stone extends JButton{
 
     @Override
     public void paintComponent(Graphics g){
-
-        if(!stonePlaced){
-
-        }
         int diameter = getDiameter();
         int radius = diameter/2;
 
         //circle fill
-        if(enabled){
-            if(mousePressed){
+        if(stoneEnabled){
+            if(stonePlaced){
                 if(this.blackTurn){
                     g.setColor(Color.BLACK);
                 }
                 else{
                     g.setColor(Color.WHITE);
                 }
-            }
-            else if(mouseOver){
-                g.setColor(Color.GREEN);
             }
             else{
                 g.setColor(new Color(255, 215, 175));
@@ -80,12 +73,7 @@ public class Stone extends JButton{
 
 
         //circle outline
-        if(mouseOver && enabled && !mousePressed){
-            g.setColor(Color.GREEN);
-        }
-        else{
-            g.setColor(Color.BLACK);
-        }
+        g.setColor(Color.BLACK);
         g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
 
 
@@ -99,13 +87,16 @@ public class Stone extends JButton{
 
     public void placeStone(boolean state){
         blackTurn = state;
-        mousePressed = true;
         stonePlaced = true;
         repaint();
     }
 
     public void setEnabled(boolean enabled){
-        this.enabled = enabled;
+        this.stoneEnabled = enabled;
+    }
+
+    public boolean getEnabled() {
+        return stoneEnabled;
     }
 
     public void setMousePressed(boolean mousePressed){

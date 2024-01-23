@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f9a091a-0a49-401f-8b0e-3e79c2e5adac" name="Changes" comment="board size select and grid layout of circle buttons">
+      <change afterPath="$PROJECT_DIR$/src/test/java/GoTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Stone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Stone.java" afterDir="false" />
     </list>
@@ -47,31 +49,87 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/sophi/Documents/TSIJava/Jan/Go2&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.BoardTest.executor": "Coverage",
+    "JUnit.BoardTest.testCaptureStone.executor": "Run",
+    "JUnit.BoardTest.testCreateBoard.executor": "Run",
+    "JUnit.BoardTest.testCreateBoardSize.executor": "Run",
+    "JUnit.BoardTest.testPlaceStone.executor": "Run",
+    "JUnit.BoardTest.testPlaceStoneDisabled.executor": "Run",
+    "JUnit.BoardTest.testSetHandicap.executor": "Run",
+    "JUnit.BoardTest.testStonesEnabled.executor": "Run",
+    "JUnit.GoTest.executor": "Coverage",
+    "JUnit.GoTest.testCaptureMultipleStones.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/sophi/Documents/TSIJava/Jan/Go2",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
-  <component name="RunManager">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main" />
+}]]></component>
+  <component name="RunManager" selected="JUnit.GoTest.testCaptureMultipleStones">
+    <configuration name="GoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Go2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GoTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoTest.testCaptureMultipleStones" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Go2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GoTest" />
+      <option name="METHOD_NAME" value="testCaptureMultipleStones" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoTest.testCaptureStone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Go2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GoTest" />
+      <option name="METHOD_NAME" value="testCaptureStone" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoTest.testPlaceStone" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Go2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GoTest" />
+      <option name="METHOD_NAME" value="testPlaceStone" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GoTest.testPlaceStoneDisabled" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Go2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="GoTest" />
+      <option name="METHOD_NAME" value="testPlaceStoneDisabled" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.GoTest.testCaptureMultipleStones" />
+        <item itemvalue="JUnit.GoTest" />
+        <item itemvalue="JUnit.GoTest.testCaptureStone" />
+        <item itemvalue="JUnit.GoTest.testPlaceStone" />
+        <item itemvalue="JUnit.GoTest.testPlaceStoneDisabled" />
       </list>
     </recent_temporary>
   </component>
@@ -98,5 +156,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="board size select and grid layout of circle buttons" />
     <option name="LAST_COMMIT_MESSAGE" value="board size select and grid layout of circle buttons" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Go2$BoardTest.ic" NAME="GoTest Coverage Results" MODIFIED="1706019918480" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
