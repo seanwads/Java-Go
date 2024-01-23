@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Stone.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Go2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Stone.java</span></div><h1>Stone.java</h1><pre class="source lang-java linenums">import javax.swing.JButton;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.geom.Point2D;
+import java.awt.FontMetrics;
+import java.util.ArrayList;
+
+public class Stone extends JButton{
+
+<span class="fc" id="L11">    private boolean mouseOver = false;</span>
+<span class="fc" id="L12">    private boolean mousePressed = false;</span>
+<span class="fc" id="L13">    private boolean stoneEnabled = true;</span>
+<span class="fc" id="L14">    private boolean blackTurn = true;</span>
+<span class="fc" id="L15">    private boolean stonePlaced = false;</span>
+<span class="fc" id="L16">    private boolean checked = false;</span>
+
+    private ArrayList&lt;Stone&gt; neighbours;
+    private final int xPos;
+    private final int yPos;
+
+    public Stone(String text, int x, int y){
+<span class="fc" id="L23">        super(text);</span>
+<span class="fc" id="L24">        setOpaque(false);</span>
+<span class="fc" id="L25">        setFocusPainted(false);</span>
+<span class="fc" id="L26">        setBorderPainted(false);</span>
+<span class="fc" id="L27">        xPos = x;</span>
+<span class="fc" id="L28">        yPos = y;</span>
+<span class="fc" id="L29">    }</span>
+
+    private int getDiameter(){
+<span class="fc" id="L32">        return Math.min(getWidth(), getHeight());</span>
+    }
+
+    @Override
+    public Dimension getPreferredSize(){
+<span class="nc" id="L37">        FontMetrics metrics = getGraphics().getFontMetrics(getFont());</span>
+<span class="nc" id="L38">        int minDiameter = 10 + Math.max(metrics.stringWidth(getText()), metrics.getHeight());</span>
+<span class="nc" id="L39">        return new Dimension(minDiameter, minDiameter);</span>
+    }
+
+    @Override
+    public boolean contains(int x, int y){
+<span class="fc" id="L44">        int radius = getDiameter()/2;</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">        return Point2D.distance(x, y, getWidth()/2, getHeight()/2) &lt; radius;</span>
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+<span class="fc" id="L50">        int diameter = getDiameter();</span>
+<span class="fc" id="L51">        int radius = diameter/2;</span>
+
+        //circle fill
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if(stoneEnabled){</span>
+<span class="fc bfc" id="L55" title="All 2 branches covered.">            if(stonePlaced){</span>
+<span class="fc bfc" id="L56" title="All 2 branches covered.">                if(this.blackTurn){</span>
+<span class="fc" id="L57">                    g.setColor(Color.BLACK);</span>
+                }
+                else{
+<span class="fc" id="L60">                    g.setColor(Color.WHITE);</span>
+                }
+            }
+            else{
+<span class="fc" id="L64">                g.setColor(new Color(255, 215, 175));</span>
+            }
+
+<span class="fc" id="L67">            g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);</span>
+        }
+        else{
+<span class="fc" id="L70">            g.setColor(new Color(150, 150, 150));</span>
+<span class="fc" id="L71">            g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);</span>
+        }
+
+
+        //circle outline
+<span class="fc" id="L76">        g.setColor(Color.BLACK);</span>
+<span class="fc" id="L77">        g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);</span>
+
+
+<span class="fc" id="L80">        g.setColor(Color.BLACK);</span>
+<span class="fc" id="L81">        g.setFont(getFont());</span>
+<span class="fc" id="L82">        FontMetrics metrics = g.getFontMetrics(getFont());</span>
+<span class="fc" id="L83">        int stringWidth = metrics.stringWidth(getText());</span>
+<span class="fc" id="L84">        int stringHeight = metrics.getHeight();</span>
+<span class="fc" id="L85">        g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);</span>
+<span class="fc" id="L86">    }</span>
+
+    public void placeStone(boolean state){
+<span class="fc" id="L89">        blackTurn = state;</span>
+<span class="fc" id="L90">        stonePlaced = true;</span>
+<span class="fc" id="L91">        repaint();</span>
+<span class="fc" id="L92">    }</span>
+
+    public void setEnabled(boolean enabled){
+<span class="fc" id="L95">        this.stoneEnabled = enabled;</span>
+<span class="fc" id="L96">    }</span>
+
+    public boolean getEnabled() {
+<span class="fc" id="L99">        return stoneEnabled;</span>
+    }
+
+    public void setMousePressed(boolean mousePressed){
+<span class="fc" id="L103">        this.mousePressed = mousePressed;</span>
+<span class="fc" id="L104">    }</span>
+
+    public void setBlackTurn(boolean isBlack){
+<span class="fc" id="L107">        this.blackTurn = isBlack;</span>
+<span class="fc" id="L108">    }</span>
+
+    public boolean isBlackTurn() {
+<span class="fc" id="L111">        return blackTurn;</span>
+    }
+
+    public boolean isStonePlaced() {
+<span class="fc" id="L115">        return stonePlaced;</span>
+    }
+
+    public void setStonePlaced(boolean stonePlaced) {
+<span class="fc" id="L119">        this.stonePlaced = stonePlaced;</span>
+<span class="fc" id="L120">    }</span>
+
+    public ArrayList&lt;Stone&gt; getNeighbours() {
+<span class="fc" id="L123">        return neighbours;</span>
+    }
+
+    public void setNeighbours(ArrayList&lt;Stone&gt; neighbours) {
+<span class="fc" id="L127">        this.neighbours = neighbours;</span>
+<span class="fc" id="L128">    }</span>
+
+    public int getxPos() {
+<span class="fc" id="L131">        return xPos;</span>
+    }
+
+    public int getyPos() {
+<span class="fc" id="L135">        return yPos;</span>
+    }
+
+    public boolean isChecked() {
+<span class="nc" id="L139">        return checked;</span>
+    }
+    public void setChecked(boolean checked) {
+<span class="nc" id="L142">        this.checked = checked;</span>
+<span class="nc" id="L143">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Board.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Go2</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Board.java</span></div><h1>Board.java</h1><pre class="source lang-java linenums">import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import javax.swing.*;
+
+public class Board {
+<span class="fc" id="L7">    JFrame frame = new JFrame();</span>
+<span class="fc" id="L8">    JPanel titlePanel = new JPanel();</span>
+<span class="fc" id="L9">    JPanel buttonPanel = new JPanel();</span>
+<span class="fc" id="L10">    JPanel infoPanel = new JPanel();</span>
+<span class="fc" id="L11">    JLabel textField = new JLabel();</span>
+<span class="fc" id="L12">    JLabel whiteCapturedText = new JLabel();</span>
+<span class="fc" id="L13">    JLabel blackCapturedText = new JLabel();</span>
+<span class="fc" id="L14">    JLabel emptyLabel = new JLabel();</span>
+<span class="fc" id="L15">    JButton sBoardButton = new JButton(&quot;9x9&quot;);</span>
+<span class="fc" id="L16">    JButton mBoardButton = new JButton(&quot;13x13&quot;);</span>
+<span class="fc" id="L17">    JButton lBoardButton = new JButton(&quot;19x19&quot;);</span>
+<span class="fc" id="L18">    JButton yesButton = new JButton(&quot;Yes&quot;);</span>
+<span class="fc" id="L19">    JButton noButton = new JButton(&quot;No&quot;);</span>
+<span class="fc" id="L20">    JLabel handicapText = new JLabel(&quot;Set Handicap?&quot;);</span>
+    JButton startButton;
+
+    Stone[][] buttons;
+    boolean blackTurn;
+<span class="fc" id="L25">    int boardSize = 9;</span>
+<span class="fc" id="L26">    int blackCaptured = 0;</span>
+<span class="fc" id="L27">    int whiteCaptured = 0;</span>
+
+<span class="fc" id="L29">    boolean isHandicapTurn = false;</span>
+<span class="fc" id="L30">    public Board(){</span>
+        //frame setup
+<span class="fc" id="L32">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="fc" id="L33">        frame.setSize(800, 900);</span>
+<span class="fc" id="L34">        frame.getContentPane().setBackground(Color.WHITE);</span>
+<span class="fc" id="L35">        frame.setLayout(new BorderLayout());</span>
+<span class="fc" id="L36">        frame.setVisible(true);</span>
+
+        //text field setup
+<span class="fc" id="L39">        textField.setBackground(new Color(255, 255, 255));</span>
+<span class="fc" id="L40">        textField.setForeground(new Color(30, 0, 0));</span>
+<span class="fc" id="L41">        textField.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</span>
+<span class="fc" id="L42">        textField.setHorizontalAlignment(JLabel.CENTER);</span>
+<span class="fc" id="L43">        textField.setText(&quot;Select board size to start&quot;);</span>
+<span class="fc" id="L44">        textField.setOpaque(true);</span>
+
+        //title panel setup
+<span class="fc" id="L47">        titlePanel.setLayout(new BorderLayout());</span>
+<span class="fc" id="L48">        titlePanel.setBounds(0, 0, 800, 200);</span>
+<span class="fc" id="L49">        titlePanel.add(textField);</span>
+<span class="fc" id="L50">        frame.add(titlePanel, BorderLayout.NORTH);</span>
+
+        //menu button panel setup
+<span class="fc" id="L53">        buttonPanel.setBounds(0, 200, 800, 200);</span>
+<span class="fc" id="L54">        buttonPanel.setBackground(new Color(230, 230, 230));</span>
+<span class="fc" id="L55">        sBoardButton.setBounds(0, 0, 50, 30);</span>
+<span class="fc" id="L56">        sBoardButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L59">                boardSize = 9;</span>
+<span class="nc" id="L60">                setHandicap();</span>
+<span class="nc" id="L61">            }</span>
+        });
+<span class="fc" id="L63">        buttonPanel.add(sBoardButton);</span>
+
+<span class="fc" id="L65">        mBoardButton.setBounds(0, 0, 50, 30);</span>
+<span class="fc" id="L66">        mBoardButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L69">                boardSize = 13;</span>
+<span class="nc" id="L70">                setHandicap();</span>
+<span class="nc" id="L71">            }</span>
+        });
+<span class="fc" id="L73">        buttonPanel.add(mBoardButton);</span>
+
+<span class="fc" id="L75">        lBoardButton.setBounds(0, 0, 50, 30);</span>
+<span class="fc" id="L76">        lBoardButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L79">                boardSize = 19;</span>
+<span class="nc" id="L80">                setHandicap();</span>
+<span class="nc" id="L81">            }</span>
+        });
+<span class="fc" id="L83">        buttonPanel.add(lBoardButton);</span>
+<span class="fc" id="L84">        frame.add(buttonPanel, BorderLayout.CENTER);</span>
+
+<span class="fc" id="L86">        blackCapturedText.setForeground(new Color(30, 0, 0));</span>
+<span class="fc" id="L87">        blackCapturedText.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</span>
+<span class="fc" id="L88">        blackCapturedText.setHorizontalAlignment(JLabel.LEFT);</span>
+<span class="fc" id="L89">        blackCapturedText.setText(&quot;Black Stones Captured: 0&quot;);</span>
+<span class="fc" id="L90">        blackCapturedText.setOpaque(true);</span>
+
+<span class="fc" id="L92">        whiteCapturedText.setForeground(new Color(30, 0, 0));</span>
+<span class="fc" id="L93">        whiteCapturedText.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</span>
+<span class="fc" id="L94">        whiteCapturedText.setHorizontalAlignment(JLabel.RIGHT);</span>
+<span class="fc" id="L95">        whiteCapturedText.setText(&quot;White Stones Captured: 0&quot;);</span>
+<span class="fc" id="L96">        whiteCapturedText.setOpaque(true);</span>
+
+<span class="fc" id="L98">        emptyLabel.setText(&quot;        &quot;);</span>
+<span class="fc" id="L99">        blackCapturedText.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</span>
+
+<span class="fc" id="L101">        infoPanel.setBounds(0, 0, 800, 100);</span>
+<span class="fc" id="L102">        infoPanel.add(blackCapturedText, BorderLayout.WEST);</span>
+<span class="fc" id="L103">        infoPanel.add(emptyLabel);</span>
+<span class="fc" id="L104">        infoPanel.add(whiteCapturedText, BorderLayout.EAST);</span>
+<span class="fc" id="L105">        frame.add(infoPanel, BorderLayout.SOUTH);</span>
+<span class="fc" id="L106">        frame.repaint();</span>
+<span class="fc" id="L107">    }</span>
+
+    private void setHandicap(){
+<span class="nc" id="L110">        buttonPanel.remove(sBoardButton);</span>
+<span class="nc" id="L111">        buttonPanel.remove(mBoardButton);</span>
+<span class="nc" id="L112">        buttonPanel.remove(lBoardButton);</span>
+
+<span class="nc" id="L114">        yesButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L117">                firstTurn(true);</span>
+<span class="nc" id="L118">            }</span>
+        });
+
+<span class="nc" id="L121">        noButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L124">                firstTurn(false);</span>
+<span class="nc" id="L125">            }</span>
+        });
+
+<span class="nc" id="L128">        buttonPanel.add(handicapText);</span>
+<span class="nc" id="L129">        buttonPanel.add(yesButton);</span>
+<span class="nc" id="L130">        buttonPanel.add(noButton);</span>
+
+<span class="nc" id="L132">        frame.getContentPane().revalidate();</span>
+<span class="nc" id="L133">        frame.getContentPane().repaint();</span>
+<span class="nc" id="L134">    }</span>
+
+    public void firstTurn(boolean isHandicap){
+<span class="fc" id="L137">        buttonPanel.remove(handicapText);</span>
+<span class="fc" id="L138">        buttonPanel.remove(yesButton);</span>
+<span class="fc" id="L139">        buttonPanel.remove(noButton);</span>
+
+<span class="fc" id="L141">        buttons = new Stone[boardSize][boardSize];</span>
+<span class="fc" id="L142">        buttonPanel.setLayout(new GridLayout(boardSize, boardSize));</span>
+
+<span class="fc bfc" id="L144" title="All 2 branches covered.">        for(int y = 0; y &lt; boardSize; y++){</span>
+<span class="fc bfc" id="L145" title="All 2 branches covered.">            for(int x = 0; x &lt; boardSize; x++){</span>
+<span class="fc" id="L146">                buttons[x][y] = new Stone(&quot;&quot;, x, y);</span>
+<span class="fc" id="L147">                buttonPanel.add(buttons[x][y]);</span>
+<span class="fc" id="L148">                buttons[x][y].setBlackTurn(true);</span>
+<span class="fc" id="L149">                buttons[x][y].setFocusable(false);</span>
+<span class="fc" id="L150">                int finalX = x;</span>
+<span class="fc" id="L151">                int finalY = y;</span>
+<span class="fc" id="L152">                buttons[x][y].addActionListener(new ActionListener() {</span>
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+<span class="pc bpc" id="L155" title="1 of 4 branches missed.">                        if(!buttons[finalX][finalY].isStonePlaced() &amp;&amp; buttons[finalX][finalY].getEnabled()){</span>
+<span class="fc" id="L156">                            buttons[finalX][finalY].placeStone(blackTurn);</span>
+
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">                            if(!isHandicapTurn){</span>
+<span class="fc" id="L159">                                checkChain(finalX, finalY);</span>
+<span class="fc" id="L160">                                checkCapture();</span>
+<span class="fc bfc" id="L161" title="All 2 branches covered.">                                blackTurn = !blackTurn;</span>
+<span class="fc" id="L162">                                updateTextField();</span>
+                            }
+                        }
+<span class="fc" id="L165">                    }</span>
+                });
+            }
+        }
+<span class="fc bfc" id="L169" title="All 2 branches covered.">        for(int y = 0; y &lt; boardSize; y++){</span>
+<span class="fc bfc" id="L170" title="All 2 branches covered.">            for(int x = 0; x &lt; boardSize; x++){</span>
+<span class="fc" id="L171">               setNeighbours(x, y);</span>
+            }
+        }
+<span class="fc" id="L174">        frame.add(buttonPanel);</span>
+
+<span class="fc" id="L176">        blackTurn = true;</span>
+<span class="fc" id="L177">        updateTextField();</span>
+
+<span class="fc" id="L179">        frame.getContentPane().revalidate();</span>
+<span class="fc" id="L180">        frame.getContentPane().repaint();</span>
+
+<span class="fc bfc" id="L182" title="All 2 branches covered.">        if(isHandicap){</span>
+<span class="fc" id="L183">            placeHandicap();</span>
+        }
+<span class="fc" id="L185">    }</span>
+
+    private void placeHandicap() {
+<span class="fc" id="L188">        isHandicapTurn = true;</span>
+<span class="fc bfc" id="L189" title="All 2 branches covered.">        for(int y = 0; y &lt; boardSize; y++){</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            for(int x = 0; x &lt; boardSize; x++){</span>
+<span class="fc" id="L191">                buttons[x][y].setEnabled(false);</span>
+            }
+        }
+
+<span class="pc bpc" id="L195" title="3 of 4 branches missed.">        switch (boardSize) {</span>
+            case 9:
+<span class="nc bnc" id="L197" title="All 2 branches missed.">                for(int y = 2; y &lt; 7; y += 4){</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">                    for(int x = 2; x &lt; 7; x += 4){</span>
+<span class="nc" id="L199">                        buttons[x][y].setEnabled(true);</span>
+                    }
+                }
+<span class="nc" id="L202">                break;</span>
+            case 13:
+<span class="fc bfc" id="L204" title="All 2 branches covered.">                for(int y = 3; y &lt; 10; y += 3){</span>
+<span class="fc bfc" id="L205" title="All 2 branches covered.">                    for(int x = 3; x &lt; 10; x += 3){</span>
+<span class="fc" id="L206">                        buttons[x][y].setEnabled(true);</span>
+                    }
+                }
+<span class="fc" id="L209">                break;</span>
+            case 19:
+<span class="nc bnc" id="L211" title="All 2 branches missed.">                for(int y = 3; y &lt; 16; y += 6){</span>
+<span class="nc bnc" id="L212" title="All 2 branches missed.">                    for(int x = 3; x &lt; 16; x += 6){</span>
+<span class="nc" id="L213">                        buttons[x][y].setEnabled(true);</span>
+                    }
+                }
+                break;
+        }
+
+<span class="fc" id="L219">        startButton = new JButton(&quot;Start Game&quot;);</span>
+<span class="fc" id="L220">        startButton.addActionListener(new ActionListener() {</span>
+            @Override
+            public void actionPerformed(ActionEvent e) {
+<span class="fc" id="L223">                isHandicapTurn = false;</span>
+<span class="pc bpc" id="L224" title="1 of 2 branches missed.">                blackTurn = !blackTurn;</span>
+<span class="fc" id="L225">                updateTextField();</span>
+<span class="fc bfc" id="L226" title="All 2 branches covered.">                for(int y = 0; y &lt; boardSize; y++){</span>
+<span class="fc bfc" id="L227" title="All 2 branches covered.">                    for(int x = 0; x &lt; boardSize; x++){</span>
+<span class="fc" id="L228">                        buttons[x][y].setEnabled(true);</span>
+                    }
+                }
+<span class="fc" id="L231">                titlePanel.remove(startButton);</span>
+<span class="fc" id="L232">                frame.getContentPane().revalidate();</span>
+<span class="fc" id="L233">                frame.getContentPane().repaint();</span>
+<span class="fc" id="L234">            }</span>
+        });
+
+<span class="fc" id="L237">        titlePanel.add(startButton, BorderLayout.PAGE_END);</span>
+<span class="fc" id="L238">        frame.getContentPane().revalidate();</span>
+<span class="fc" id="L239">        frame.getContentPane().repaint();</span>
+<span class="fc" id="L240">    }</span>
+
+    private void setNeighbours(int x, int y){
+<span class="fc" id="L243">        ArrayList&lt;Stone&gt; neighbours = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L245" title="All 2 branches covered.">        for(int i = -1; i &lt; 2; i++){</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">            for(int j = -1; j &lt; 2; j++){</span>
+<span class="fc bfc" id="L247" title="All 10 branches covered.">                if(!( i==j ) &amp;&amp; !(i == -1 &amp;&amp; j == 1) &amp;&amp; !(i == 1 &amp;&amp; j == -1)){</span>
+                    try{
+<span class="fc" id="L249">                        neighbours.add(buttons[x+i][y+j]);</span>
+<span class="fc" id="L250">                    } catch(Exception e){</span>
+<span class="fc" id="L251">                        continue;</span>
+<span class="fc" id="L252">                    }</span>
+                }
+            }
+        }
+<span class="fc" id="L256">        buttons[x][y].setNeighbours(neighbours);</span>
+<span class="fc" id="L257">    }</span>
+
+<span class="fc" id="L259">    ArrayList&lt;Stone&gt; stonesToCheck = new ArrayList&lt;&gt;();</span>
+    private void checkChain(int x, int y){
+<span class="fc" id="L261">        Stone stone = buttons[x][y];</span>
+
+<span class="fc bfc" id="L263" title="All 2 branches covered.">        for(Stone neighbour : stone.getNeighbours()){</span>
+<span class="fc bfc" id="L264" title="All 6 branches covered.">            if(neighbour.isStonePlaced() &amp;&amp; neighbour.isBlackTurn() != blackTurn &amp;&amp; !stonesToCheck.contains(neighbour)){</span>
+<span class="fc" id="L265">                stonesToCheck.add(neighbour);</span>
+<span class="fc" id="L266">                checkChain(neighbour.getxPos(), neighbour.getyPos());</span>
+            }
+<span class="fc" id="L268">        }</span>
+<span class="fc" id="L269">    }</span>
+
+   private void checkCapture() {
+<span class="fc bfc" id="L272" title="All 2 branches covered.">        if(!stonesToCheck.isEmpty()){</span>
+<span class="fc bfc" id="L273" title="All 2 branches covered.">            for(Stone stone : stonesToCheck){</span>
+<span class="fc bfc" id="L274" title="All 2 branches covered.">                for(Stone neighbour : stone.getNeighbours()){</span>
+<span class="pc bpc" id="L275" title="1 of 2 branches missed.">                    if(!neighbour.isStonePlaced()){</span>
+<span class="nc" id="L276">                        System.out.println(&quot;not capture&quot;);</span>
+<span class="nc" id="L277">                        stonesToCheck.clear();</span>
+<span class="nc" id="L278">                        return;</span>
+                    }
+<span class="fc" id="L280">                }</span>
+<span class="fc" id="L281">            }</span>
+
+<span class="fc bfc" id="L283" title="All 2 branches covered.">            for(Stone stone: stonesToCheck){</span>
+<span class="fc" id="L284">                stone.setStonePlaced(false);</span>
+<span class="fc" id="L285">                stone.setMousePressed(false);</span>
+<span class="fc" id="L286">                stone.repaint();</span>
+<span class="fc" id="L287">            }</span>
+
+<span class="fc bfc" id="L289" title="All 2 branches covered.">            if(blackTurn){</span>
+<span class="fc" id="L290">                whiteCaptured += stonesToCheck.size();</span>
+            }
+            else{
+<span class="fc" id="L293">                blackCaptured += stonesToCheck.size();</span>
+            }
+
+<span class="fc" id="L296">            System.out.println(whiteCaptured + &quot; white&quot;);</span>
+<span class="fc" id="L297">            System.out.println(blackCaptured + &quot; black&quot;);</span>
+<span class="fc" id="L298">            stonesToCheck.clear();</span>
+        }
+<span class="fc" id="L300">   }</span>
+
+    private void updateTextField() {
+<span class="fc bfc" id="L303" title="All 2 branches covered.">        if(blackTurn){</span>
+<span class="fc" id="L304">            textField.setText(&quot;Black's Turn&quot;);</span>
+        } else {
+<span class="fc" id="L306">            textField.setText(&quot;White's Turn&quot;);</span>
+        }
+
+<span class="fc" id="L309">        whiteCapturedText.setText(&quot;White Stones Captured: &quot; + whiteCaptured);</span>
+<span class="fc" id="L310">        blackCapturedText.setText(&quot;Black Stones Captured: &quot; + blackCaptured);</span>
+<span class="fc" id="L311">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>
