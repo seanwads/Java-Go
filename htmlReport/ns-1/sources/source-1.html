@@ -1,0 +1,556 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Board</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Board (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Board</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.7%
+  </span>
+  <span class="absValue">
+    (149/159)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Board$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Board$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Board$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (1/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Board$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Board$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Board$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Board$7</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (20/22)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.6%
+  </span>
+  <span class="absValue">
+    (176/190)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import java.awt.*;
+&nbsp;import java.awt.event.*;
+&nbsp;import java.util.*;
+&nbsp;import javax.swing.*;
+&nbsp;
+&nbsp;public class Board {
+<b class="fc">&nbsp;    JFrame frame = new JFrame();</b>
+<b class="fc">&nbsp;    JPanel titlePanel = new JPanel();</b>
+<b class="fc">&nbsp;    JPanel buttonPanel = new JPanel();</b>
+<b class="fc">&nbsp;    JPanel infoPanel = new JPanel();</b>
+<b class="fc">&nbsp;    JLabel textField = new JLabel();</b>
+<b class="fc">&nbsp;    JLabel whiteCapturedText = new JLabel();</b>
+<b class="fc">&nbsp;    JLabel blackCapturedText = new JLabel();</b>
+<b class="fc">&nbsp;    JLabel emptyLabel = new JLabel();</b>
+<b class="fc">&nbsp;    JButton sBoardButton = new JButton(&quot;9x9&quot;);</b>
+<b class="fc">&nbsp;    JButton mBoardButton = new JButton(&quot;13x13&quot;);</b>
+<b class="fc">&nbsp;    JButton lBoardButton = new JButton(&quot;19x19&quot;);</b>
+<b class="fc">&nbsp;    JButton yesButton = new JButton(&quot;Yes&quot;);</b>
+<b class="fc">&nbsp;    JButton noButton = new JButton(&quot;No&quot;);</b>
+<b class="fc">&nbsp;    JLabel handicapText = new JLabel(&quot;Set Handicap?&quot;);</b>
+&nbsp;    JButton startButton;
+&nbsp;
+&nbsp;    Stone[][] buttons;
+&nbsp;    boolean blackTurn;
+<b class="fc">&nbsp;    int boardSize = 9;</b>
+<b class="fc">&nbsp;    int blackCaptured = 0;</b>
+<b class="fc">&nbsp;    int whiteCaptured = 0;</b>
+&nbsp;
+<b class="fc">&nbsp;    boolean isHandicapTurn = false;</b>
+<b class="fc">&nbsp;    public Board(){</b>
+&nbsp;        //frame setup
+<b class="fc">&nbsp;        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</b>
+<b class="fc">&nbsp;        frame.setSize(800, 900);</b>
+<b class="fc">&nbsp;        frame.getContentPane().setBackground(Color.WHITE);</b>
+<b class="fc">&nbsp;        frame.setLayout(new BorderLayout());</b>
+<b class="fc">&nbsp;        frame.setVisible(true);</b>
+&nbsp;
+&nbsp;        //text field setup
+<b class="fc">&nbsp;        textField.setBackground(new Color(255, 255, 255));</b>
+<b class="fc">&nbsp;        textField.setForeground(new Color(30, 0, 0));</b>
+<b class="fc">&nbsp;        textField.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</b>
+<b class="fc">&nbsp;        textField.setHorizontalAlignment(JLabel.CENTER);</b>
+<b class="fc">&nbsp;        textField.setText(&quot;Select board size to start&quot;);</b>
+<b class="fc">&nbsp;        textField.setOpaque(true);</b>
+&nbsp;
+&nbsp;        //title panel setup
+<b class="fc">&nbsp;        titlePanel.setLayout(new BorderLayout());</b>
+<b class="fc">&nbsp;        titlePanel.setBounds(0, 0, 800, 200);</b>
+<b class="fc">&nbsp;        titlePanel.add(textField);</b>
+<b class="fc">&nbsp;        frame.add(titlePanel, BorderLayout.NORTH);</b>
+&nbsp;
+&nbsp;        //menu button panel setup
+<b class="fc">&nbsp;        buttonPanel.setBounds(0, 200, 800, 200);</b>
+<b class="fc">&nbsp;        buttonPanel.setBackground(new Color(230, 230, 230));</b>
+<b class="fc">&nbsp;        sBoardButton.setBounds(0, 0, 50, 30);</b>
+<b class="fc">&nbsp;        sBoardButton.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="nc">&nbsp;                boardSize = 9;</b>
+<b class="nc">&nbsp;                setHandicap();</b>
+&nbsp;            }
+&nbsp;        });
+<b class="fc">&nbsp;        buttonPanel.add(sBoardButton);</b>
+&nbsp;
+<b class="fc">&nbsp;        mBoardButton.setBounds(0, 0, 50, 30);</b>
+<b class="fc">&nbsp;        mBoardButton.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                boardSize = 13;</b>
+<b class="fc">&nbsp;                setHandicap();</b>
+&nbsp;            }
+&nbsp;        });
+<b class="fc">&nbsp;        buttonPanel.add(mBoardButton);</b>
+&nbsp;
+<b class="fc">&nbsp;        lBoardButton.setBounds(0, 0, 50, 30);</b>
+<b class="fc">&nbsp;        lBoardButton.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="nc">&nbsp;                boardSize = 19;</b>
+<b class="nc">&nbsp;                setHandicap();</b>
+&nbsp;            }
+&nbsp;        });
+<b class="fc">&nbsp;        buttonPanel.add(lBoardButton);</b>
+<b class="fc">&nbsp;        frame.add(buttonPanel, BorderLayout.CENTER);</b>
+&nbsp;
+<b class="fc">&nbsp;        blackCapturedText.setForeground(new Color(30, 0, 0));</b>
+<b class="fc">&nbsp;        blackCapturedText.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</b>
+<b class="fc">&nbsp;        blackCapturedText.setHorizontalAlignment(JLabel.LEFT);</b>
+<b class="fc">&nbsp;        blackCapturedText.setText(&quot;Black Stones Captured: 0&quot;);</b>
+<b class="fc">&nbsp;        blackCapturedText.setOpaque(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        whiteCapturedText.setForeground(new Color(30, 0, 0));</b>
+<b class="fc">&nbsp;        whiteCapturedText.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</b>
+<b class="fc">&nbsp;        whiteCapturedText.setHorizontalAlignment(JLabel.RIGHT);</b>
+<b class="fc">&nbsp;        whiteCapturedText.setText(&quot;White Stones Captured: 0&quot;);</b>
+<b class="fc">&nbsp;        whiteCapturedText.setOpaque(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        emptyLabel.setText(&quot;        &quot;);</b>
+<b class="fc">&nbsp;        blackCapturedText.setFont(new Font(Font.MONOSPACED,Font.BOLD, 24));</b>
+&nbsp;
+<b class="fc">&nbsp;        infoPanel.setBounds(0, 0, 800, 100);</b>
+<b class="fc">&nbsp;        infoPanel.add(blackCapturedText, BorderLayout.WEST);</b>
+<b class="fc">&nbsp;        infoPanel.add(emptyLabel);</b>
+<b class="fc">&nbsp;        infoPanel.add(whiteCapturedText, BorderLayout.EAST);</b>
+<b class="fc">&nbsp;        frame.add(infoPanel, BorderLayout.SOUTH);</b>
+<b class="fc">&nbsp;        frame.repaint();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void setHandicap(){
+<b class="fc">&nbsp;        buttonPanel.remove(sBoardButton);</b>
+<b class="fc">&nbsp;        buttonPanel.remove(mBoardButton);</b>
+<b class="fc">&nbsp;        buttonPanel.remove(lBoardButton);</b>
+&nbsp;
+<b class="fc">&nbsp;        yesButton.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                firstTurn(true);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        noButton.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                firstTurn(false);</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        buttonPanel.add(handicapText);</b>
+<b class="fc">&nbsp;        buttonPanel.add(yesButton);</b>
+<b class="fc">&nbsp;        buttonPanel.add(noButton);</b>
+&nbsp;
+<b class="fc">&nbsp;        frame.getContentPane().revalidate();</b>
+<b class="fc">&nbsp;        frame.getContentPane().repaint();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void firstTurn(boolean isHandicap){
+<b class="fc">&nbsp;        buttonPanel.remove(handicapText);</b>
+<b class="fc">&nbsp;        buttonPanel.remove(yesButton);</b>
+<b class="fc">&nbsp;        buttonPanel.remove(noButton);</b>
+&nbsp;
+<b class="fc">&nbsp;        buttons = new Stone[boardSize][boardSize];</b>
+<b class="fc">&nbsp;        buttonPanel.setLayout(new GridLayout(boardSize, boardSize));</b>
+&nbsp;
+<b class="fc">&nbsp;        for(int y = 0; y &lt; boardSize; y++){</b>
+<b class="fc">&nbsp;            for(int x = 0; x &lt; boardSize; x++){</b>
+<b class="fc">&nbsp;                buttons[x][y] = new Stone(&quot;&quot;, x, y);</b>
+<b class="fc">&nbsp;                buttonPanel.add(buttons[x][y]);</b>
+<b class="fc">&nbsp;                buttons[x][y].setBlackTurn(true);</b>
+<b class="fc">&nbsp;                buttons[x][y].setFocusable(false);</b>
+<b class="fc">&nbsp;                int finalX = x;</b>
+<b class="fc">&nbsp;                int finalY = y;</b>
+<b class="fc">&nbsp;                buttons[x][y].addActionListener(new ActionListener() {</b>
+&nbsp;                    @Override
+&nbsp;                    public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                        if(!buttons[finalX][finalY].isStonePlaced() &amp;&amp; buttons[finalX][finalY].getEnabled()){</b>
+<b class="fc">&nbsp;                            buttons[finalX][finalY].placeStone(blackTurn);</b>
+&nbsp;
+<b class="fc">&nbsp;                            if(!isHandicapTurn){</b>
+<b class="fc">&nbsp;                                checkChain(finalX, finalY);</b>
+<b class="fc">&nbsp;                                checkCapture();</b>
+<b class="fc">&nbsp;                                blackTurn = !blackTurn;</b>
+<b class="fc">&nbsp;                                updateTextField();</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                });
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        for(int y = 0; y &lt; boardSize; y++){</b>
+<b class="fc">&nbsp;            for(int x = 0; x &lt; boardSize; x++){</b>
+<b class="fc">&nbsp;               setNeighbours(x, y);</b>
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        frame.add(buttonPanel);</b>
+&nbsp;
+<b class="fc">&nbsp;        blackTurn = true;</b>
+<b class="fc">&nbsp;        updateTextField();</b>
+&nbsp;
+<b class="fc">&nbsp;        frame.getContentPane().revalidate();</b>
+<b class="fc">&nbsp;        frame.getContentPane().repaint();</b>
+&nbsp;
+<b class="fc">&nbsp;        if(isHandicap){</b>
+<b class="fc">&nbsp;            placeHandicap();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void placeHandicap() {
+<b class="fc">&nbsp;        isHandicapTurn = true;</b>
+<b class="fc">&nbsp;        for(int y = 0; y &lt; boardSize; y++){</b>
+<b class="fc">&nbsp;            for(int x = 0; x &lt; boardSize; x++){</b>
+<b class="fc">&nbsp;                buttons[x][y].setEnabled(false);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        switch (boardSize) {</b>
+&nbsp;            case 9:
+<b class="nc">&nbsp;                for(int y = 2; y &lt; 7; y += 4){</b>
+<b class="nc">&nbsp;                    for(int x = 2; x &lt; 7; x += 4){</b>
+<b class="nc">&nbsp;                        buttons[x][y].setEnabled(true);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case 13:
+<b class="fc">&nbsp;                for(int y = 3; y &lt; 10; y += 3){</b>
+<b class="fc">&nbsp;                    for(int x = 3; x &lt; 10; x += 3){</b>
+<b class="fc">&nbsp;                        buttons[x][y].setEnabled(true);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                break;</b>
+&nbsp;            case 19:
+<b class="nc">&nbsp;                for(int y = 3; y &lt; 16; y += 6){</b>
+<b class="nc">&nbsp;                    for(int x = 3; x &lt; 16; x += 6){</b>
+<b class="nc">&nbsp;                        buttons[x][y].setEnabled(true);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;                break;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        startButton = new JButton(&quot;Start Game&quot;);</b>
+<b class="fc">&nbsp;        startButton.addActionListener(new ActionListener() {</b>
+&nbsp;            @Override
+&nbsp;            public void actionPerformed(ActionEvent e) {
+<b class="fc">&nbsp;                isHandicapTurn = false;</b>
+<b class="fc">&nbsp;                blackTurn = !blackTurn;</b>
+<b class="fc">&nbsp;                updateTextField();</b>
+<b class="fc">&nbsp;                for(int y = 0; y &lt; boardSize; y++){</b>
+<b class="fc">&nbsp;                    for(int x = 0; x &lt; boardSize; x++){</b>
+<b class="fc">&nbsp;                        buttons[x][y].setEnabled(true);</b>
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;                titlePanel.remove(startButton);</b>
+<b class="fc">&nbsp;                frame.getContentPane().revalidate();</b>
+<b class="fc">&nbsp;                frame.getContentPane().repaint();</b>
+&nbsp;            }
+&nbsp;        });
+&nbsp;
+<b class="fc">&nbsp;        titlePanel.add(startButton, BorderLayout.PAGE_END);</b>
+<b class="fc">&nbsp;        frame.getContentPane().revalidate();</b>
+<b class="fc">&nbsp;        frame.getContentPane().repaint();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void setNeighbours(int x, int y){
+<b class="fc">&nbsp;        ArrayList&lt;Stone&gt; neighbours = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for(int i = -1; i &lt; 2; i++){</b>
+<b class="fc">&nbsp;            for(int j = -1; j &lt; 2; j++){</b>
+<b class="fc">&nbsp;                if(!( i==j ) &amp;&amp; !(i == -1 &amp;&amp; j == 1) &amp;&amp; !(i == 1 &amp;&amp; j == -1)){</b>
+&nbsp;                    try{
+<b class="fc">&nbsp;                        neighbours.add(buttons[x+i][y+j]);</b>
+<b class="fc">&nbsp;                    } catch(Exception e){</b>
+<b class="fc">&nbsp;                        continue;</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        buttons[x][y].setNeighbours(neighbours);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    ArrayList&lt;Stone&gt; stonesToCheck = new ArrayList&lt;&gt;();</b>
+&nbsp;    private void checkChain(int x, int y){
+<b class="fc">&nbsp;        Stone stone = buttons[x][y];</b>
+&nbsp;
+<b class="fc">&nbsp;        for(Stone neighbour : stone.getNeighbours()){</b>
+<b class="fc">&nbsp;            if(neighbour.isStonePlaced() &amp;&amp; neighbour.isBlackTurn() != blackTurn &amp;&amp; !stonesToCheck.contains(neighbour)){</b>
+<b class="fc">&nbsp;                stonesToCheck.add(neighbour);</b>
+<b class="fc">&nbsp;                checkChain(neighbour.getxPos(), neighbour.getyPos());</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;   private void checkCapture() {
+<b class="fc">&nbsp;        if(!stonesToCheck.isEmpty()){</b>
+<b class="fc">&nbsp;            for(Stone stone : stonesToCheck){</b>
+<b class="fc">&nbsp;                for(Stone neighbour : stone.getNeighbours()){</b>
+<b class="fc">&nbsp;                    if(!neighbour.isStonePlaced()){</b>
+<b class="nc">&nbsp;                        System.out.println(&quot;not capture&quot;);</b>
+<b class="nc">&nbsp;                        stonesToCheck.clear();</b>
+&nbsp;                        return;
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            for(Stone stone: stonesToCheck){</b>
+<b class="fc">&nbsp;                stone.setStonePlaced(false);</b>
+<b class="fc">&nbsp;                stone.setMousePressed(false);</b>
+<b class="fc">&nbsp;                stone.repaint();</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            if(blackTurn){</b>
+<b class="nc">&nbsp;                whiteCaptured += stonesToCheck.size();</b>
+&nbsp;            }
+&nbsp;            else{
+<b class="fc">&nbsp;                blackCaptured += stonesToCheck.size();</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            System.out.println(whiteCaptured + &quot; white&quot;);</b>
+<b class="fc">&nbsp;            System.out.println(blackCaptured + &quot; black&quot;);</b>
+<b class="fc">&nbsp;            stonesToCheck.clear();</b>
+&nbsp;        }
+&nbsp;   }
+&nbsp;
+&nbsp;    private void updateTextField() {
+<b class="fc">&nbsp;        if(blackTurn){</b>
+<b class="fc">&nbsp;            textField.setText(&quot;Black&#39;s Turn&quot;);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            textField.setText(&quot;White&#39;s Turn&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        whiteCapturedText.setText(&quot;White Stones Captured: &quot; + whiteCaptured);</b>
+<b class="fc">&nbsp;        blackCapturedText.setText(&quot;Black Stones Captured: &quot; + blackCaptured);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-23 15:42</div>
+</div>
+</body>
+</html>

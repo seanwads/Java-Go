@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Stone</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">&lt;empty package name&gt;</a>
+</div>
+
+<h1>Coverage Summary for Class: Stone (&lt;empty package name&gt;)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Stone</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78.9%
+  </span>
+  <span class="absValue">
+    (15/19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    86.8%
+  </span>
+  <span class="absValue">
+    (46/53)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;import javax.swing.JButton;
+&nbsp;import java.awt.Graphics;
+&nbsp;import java.awt.Color;
+&nbsp;import java.awt.Dimension;
+&nbsp;import java.awt.geom.Point2D;
+&nbsp;import java.awt.FontMetrics;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;public class Stone extends JButton{
+&nbsp;
+<b class="fc">&nbsp;    private boolean mouseOver = false;</b>
+<b class="fc">&nbsp;    private boolean mousePressed = false;</b>
+<b class="fc">&nbsp;    private boolean stoneEnabled = true;</b>
+<b class="fc">&nbsp;    private boolean blackTurn = true;</b>
+<b class="fc">&nbsp;    private boolean stonePlaced = false;</b>
+<b class="fc">&nbsp;    private boolean checked = false;</b>
+&nbsp;
+&nbsp;    private ArrayList&lt;Stone&gt; neighbours;
+&nbsp;    private final int xPos;
+&nbsp;    private final int yPos;
+&nbsp;
+&nbsp;    public Stone(String text, int x, int y){
+<b class="fc">&nbsp;        super(text);</b>
+<b class="fc">&nbsp;        setOpaque(false);</b>
+<b class="fc">&nbsp;        setFocusPainted(false);</b>
+<b class="fc">&nbsp;        setBorderPainted(false);</b>
+<b class="fc">&nbsp;        xPos = x;</b>
+<b class="fc">&nbsp;        yPos = y;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int getDiameter(){
+<b class="fc">&nbsp;        return Math.min(getWidth(), getHeight());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Dimension getPreferredSize(){
+<b class="nc">&nbsp;        FontMetrics metrics = getGraphics().getFontMetrics(getFont());</b>
+<b class="nc">&nbsp;        int minDiameter = 10 + Math.max(metrics.stringWidth(getText()), metrics.getHeight());</b>
+<b class="nc">&nbsp;        return new Dimension(minDiameter, minDiameter);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean contains(int x, int y){
+<b class="nc">&nbsp;        int radius = getDiameter()/2;</b>
+<b class="nc">&nbsp;        return Point2D.distance(x, y, getWidth()/2, getHeight()/2) &lt; radius;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void paintComponent(Graphics g){
+<b class="fc">&nbsp;        int diameter = getDiameter();</b>
+<b class="fc">&nbsp;        int radius = diameter/2;</b>
+&nbsp;
+&nbsp;        //circle fill
+<b class="fc">&nbsp;        if(stoneEnabled){</b>
+<b class="fc">&nbsp;            if(stonePlaced){</b>
+<b class="fc">&nbsp;                if(this.blackTurn){</b>
+<b class="fc">&nbsp;                    g.setColor(Color.BLACK);</b>
+&nbsp;                }
+&nbsp;                else{
+<b class="fc">&nbsp;                    g.setColor(Color.WHITE);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;            else{
+<b class="fc">&nbsp;                g.setColor(new Color(255, 215, 175));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);</b>
+&nbsp;        }
+&nbsp;        else{
+<b class="fc">&nbsp;            g.setColor(new Color(150, 150, 150));</b>
+<b class="fc">&nbsp;            g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;        //circle outline
+<b class="fc">&nbsp;        g.setColor(Color.BLACK);</b>
+<b class="fc">&nbsp;        g.drawOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        g.setColor(Color.BLACK);</b>
+<b class="fc">&nbsp;        g.setFont(getFont());</b>
+<b class="fc">&nbsp;        FontMetrics metrics = g.getFontMetrics(getFont());</b>
+<b class="fc">&nbsp;        int stringWidth = metrics.stringWidth(getText());</b>
+<b class="fc">&nbsp;        int stringHeight = metrics.getHeight();</b>
+<b class="fc">&nbsp;        g.drawString(getText(), getWidth()/2 - stringWidth/2, getHeight()/2 + stringHeight/4);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void placeStone(boolean state){
+<b class="fc">&nbsp;        blackTurn = state;</b>
+<b class="fc">&nbsp;        stonePlaced = true;</b>
+<b class="fc">&nbsp;        repaint();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEnabled(boolean enabled){
+<b class="fc">&nbsp;        this.stoneEnabled = enabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean getEnabled() {
+<b class="fc">&nbsp;        return stoneEnabled;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMousePressed(boolean mousePressed){
+<b class="fc">&nbsp;        this.mousePressed = mousePressed;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBlackTurn(boolean isBlack){
+<b class="fc">&nbsp;        this.blackTurn = isBlack;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isBlackTurn() {
+<b class="fc">&nbsp;        return blackTurn;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isStonePlaced() {
+<b class="fc">&nbsp;        return stonePlaced;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setStonePlaced(boolean stonePlaced) {
+<b class="fc">&nbsp;        this.stonePlaced = stonePlaced;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ArrayList&lt;Stone&gt; getNeighbours() {
+<b class="fc">&nbsp;        return neighbours;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setNeighbours(ArrayList&lt;Stone&gt; neighbours) {
+<b class="fc">&nbsp;        this.neighbours = neighbours;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getxPos() {
+<b class="fc">&nbsp;        return xPos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getyPos() {
+<b class="fc">&nbsp;        return yPos;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isChecked() {
+<b class="nc">&nbsp;        return checked;</b>
+&nbsp;    }
+&nbsp;    public void setChecked(boolean checked) {
+<b class="nc">&nbsp;        this.checked = checked;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-01-23 15:42</div>
+</div>
+</body>
+</html>
