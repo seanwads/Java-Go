@@ -14,16 +14,14 @@ public class GoTest {
 
     @Test
     public void testCreateBoardSize(){
-        board.mBoardButton.doClick();
-        board.noButton.doClick();
+        board.firstTurn(false);
 
         Assertions.assertEquals(testBoardSize, board.buttons.length, "Board size " + board.buttons.length + " not " + testBoardSize*testBoardSize);
     }
 
     @Test
     public void testSetHandicap(){
-        board.mBoardButton.doClick();
-        board.yesButton.doClick();
+        board.firstTurn(true);;
 
         Assertions.assertTrue(board.isHandicapTurn, "Handicap turn not initialised");
         Assertions.assertFalse(board.buttons[0][0].getEnabled(), "Handicap board mode not initialised - non-handicap stones not disabled");
@@ -36,8 +34,7 @@ public class GoTest {
 
     @Test
     public void testStonesEnabled(){
-        board.mBoardButton.doClick();
-        board.noButton.doClick();
+        board.firstTurn(false);
 
         boolean isEnabled = false;
         boolean isStonePlaced = false;
@@ -56,8 +53,8 @@ public class GoTest {
 
     @Test
     public void testPlaceStone(){
-        board.mBoardButton.doClick();
-        board.noButton.doClick();
+        board.firstTurn(false);
+
         Stone stone = board.buttons[0][0];
         stone.doClick();
 
@@ -68,8 +65,7 @@ public class GoTest {
 
     @Test
     public void testPlaceStoneDisabled(){
-        board.mBoardButton.doClick();
-        board.yesButton.doClick();
+        board.firstTurn(true);;
         Stone stone = board.buttons[0][0];
         stone.doClick();
 
@@ -78,8 +74,8 @@ public class GoTest {
 
     @Test
     public void testCaptureStone(){
-        board.mBoardButton.doClick();
-        board.noButton.doClick();
+        board.firstTurn(false);
+
         Stone stone = board.buttons[2][2];
         stone.doClick();
 
@@ -96,8 +92,7 @@ public class GoTest {
 
     @Test
     public void testCaptureMultipleStones() throws InterruptedException {
-        board.mBoardButton.doClick();
-        board.noButton.doClick();
+        board.firstTurn(false);
 
         Thread.sleep(1000);
 

@@ -5,9 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0f9a091a-0a49-401f-8b0e-3e79c2e5adac" name="Changes" comment="board size select and grid layout of circle buttons">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/build.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/GoTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/GoTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +57,7 @@
     "JUnit.BoardTest.testPlaceStoneDisabled.executor": "Run",
     "JUnit.BoardTest.testSetHandicap.executor": "Run",
     "JUnit.BoardTest.testStonesEnabled.executor": "Run",
-    "JUnit.GoTest.executor": "Coverage",
+    "JUnit.GoTest.executor": "Run",
     "JUnit.GoTest.testCaptureMultipleStones.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -71,7 +70,7 @@
     "project.structure.side.proportion": "0.0"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.GoTest.testCaptureMultipleStones">
+  <component name="RunManager" selected="JUnit.GoTest">
     <configuration name="GoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Go2" />
       <option name="PACKAGE_NAME" value="" />
@@ -123,8 +122,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.GoTest.testCaptureMultipleStones" />
         <item itemvalue="JUnit.GoTest" />
+        <item itemvalue="JUnit.GoTest.testCaptureMultipleStones" />
         <item itemvalue="JUnit.GoTest.testCaptureStone" />
         <item itemvalue="JUnit.GoTest.testPlaceStone" />
         <item itemvalue="JUnit.GoTest.testPlaceStoneDisabled" />
