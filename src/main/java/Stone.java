@@ -68,13 +68,13 @@ public class Stone extends JButton{
                 g.setColor(Color.GREEN);
             }
             else{
-                g.setColor(new Color(210, 255, 210));
+                g.setColor(new Color(255, 215, 175));
             }
 
             g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
         }
         else{
-            g.setColor(new Color(255, 210, 210));
+            g.setColor(new Color(150, 150, 150));
             g.fillOval(getWidth()/2 - radius, getHeight()/2 - radius, diameter, diameter);
         }
 
